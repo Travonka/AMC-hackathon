@@ -1,5 +1,6 @@
 ﻿using Itinero;
 using Itinero.IO.Osm;
+using Itinero.Osm.Vehicles;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -20,14 +21,14 @@ namespace Utils
             return true;
         }
 
-        private static bool Serialize(string from, string to)
+        private static bool Serialize(string from, string to, Itinero.Profiles.Vehicle[] vehicles)
         {
             if (File.Exists(to))
                 return false;
             var routerDb = new RouterDb();
             using (var stream = new FileInfo(from).OpenRead())
             {
-                routerDb.LoadOsmData(stream);
+                routerDb.LoadOsmData(stream, vehicles);
             }
 
             using (var stream = new FileInfo(to).Open(FileMode.Create))
@@ -45,7 +46,7 @@ namespace Utils
             NONE = 2,       
         }
 
-        public static void Install(LogLevel logLevel)
+        public static void Install(LogLevel logLevel, Itinero.Profiles.Vehicle[] vehicles)
         {
             void Log(string msg, LogLevel level)
             {
@@ -65,7 +66,7 @@ namespace Utils
                 Log("Downloading skipped", LogLevel.ANY_INFO);
             sw.Reset();
             sw.Start();
-            if (Serialize(Const.PATH_TO_OSMFBF, Const.PATH_TO_SERIALIZED))
+            if (Serialize(Const.PATH_TO_OSMFBF, Const.PATH_TO_SERIALIZED, vehicles))
             {
                 Log("Serialization begins", LogLevel.IMPORTANT_INFO);
                 Log($"Spent {sw.ElapsedMilliseconds} ms on serialization", LogLevel.IMPORTANT_INFO);

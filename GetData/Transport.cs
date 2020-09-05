@@ -8,7 +8,7 @@ namespace GetData
 {
     class Transport 
     {
-        const string Path = @"../../../..\GetData\TempData\BikesAdresses.txt";
+        const string Path = @"../../../../GetData/TempData/BikesAdresses.txt";
         List<IParking> Transports;
         CoordinatesFinder coordinatesFinder;
         public Transport()
@@ -24,7 +24,8 @@ namespace GetData
                 string line;
                 while ((line = TextFileStream.ReadLine()) != null)
                 {
-                    string[] temp = coordinatesFinder.GetCoordinates(line);
+                    //string[] temp = coordinatesFinder.GetCoordinates(line);
+                    string[] temp = null;
                     try
                     {
                         float longtitude = float.Parse(temp[0], CultureInfo.InvariantCulture);

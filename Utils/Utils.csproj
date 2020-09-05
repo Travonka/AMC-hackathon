@@ -10,8 +10,4 @@
     <PackageReference Include="Itinero.IO.Osm" Version="1.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GetData\GetData.csproj" />
-  </ItemGroup>
-
 </Project>

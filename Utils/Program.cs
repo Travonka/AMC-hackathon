@@ -6,7 +6,7 @@ namespace Utils
     {
         static void Main(string[] _)
         {
-            Installer.Install(Installer.LogLevel.EVERYTHING);
+            Installer.Install(Installer.LogLevel.EVERYTHING, new[] { Itinero.Osm.Vehicles.Vehicle.Car });
         }
     }
 }

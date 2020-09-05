@@ -10,9 +10,9 @@ namespace Utils
         private readonly Profile profile;
         private readonly Router router;
 
-        public SimpleRouteBuilder(Profile profile = null)
+        public SimpleRouteBuilder(Profile profile, Itinero.Profiles.Vehicle[] vehicles)
         {
-            Installer.Install(logLevel: Installer.LogLevel.IMPORTANT_INFO);
+            Installer.Install(logLevel: Installer.LogLevel.IMPORTANT_INFO, vehicles);
             routerDb = RouterDb.Deserialize(new FileInfo(Const.PATH_TO_SERIALIZED).OpenRead());
             this.profile = profile ?? Itinero.Osm.Vehicles.Vehicle.Car.Fastest();
             router = new Router(routerDb);
