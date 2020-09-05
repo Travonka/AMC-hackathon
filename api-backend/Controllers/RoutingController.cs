@@ -11,6 +11,7 @@ namespace api_backend.Controllers
     [ApiController]
     public class RoutingController : ControllerBase
     {
+        [Route("/GetRoute")]
         [HttpGet]
         public string GetRoute(float longitudeStart, float latitudeStart, float longitudeFinish, float latitudeFinish)
         {
@@ -18,10 +19,10 @@ namespace api_backend.Controllers
 
             return test.BuildRoute();
         }
-
-        public string Test()
+        [Route("/Test")]
+        public IActionResult Test()
         {
-            return "HellWorld";
+           return Redirect("/GetRoute");
         }
     }
 }

@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text.Json;
 using System.Reflection.Metadata;
 using Utils;
+using Newtonsoft.Json;
+using System.Globalization;
+using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace GetData
 {
@@ -17,13 +22,13 @@ namespace GetData
         public YandexAPIRequester(string path)
         {
             this.path = path;
-            data = File.Exists(path) ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(path))
+            data = File.Exists(path) ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(path))
                 : new Dictionary<string, string>();
         }
 
         private void UpdateCache()
         {
-            var json = JsonSerializer.Serialize(data);
+            var json = System.Text.Json.JsonSerializer.Serialize(data);
             File.WriteAllText(path, json);
         }
 
@@ -54,11 +59,16 @@ namespace GetData
             requester = new YandexAPIRequester(Const.PATH_TO_YANDEX_COORDINATES_CACHE);
         }
 
-        public (float longitude, float latitude) GetCoordinates(string adress)
+        public (float latitude, float longitude) GetCoordinates(string adress)
         {
-            var responseRaw = requester.GetResponse($"https://geocode-maps.yandex.ru/1.x?geocode={adress}&apikey={ApiKey}&format=json");
-            var a = 4;
-            return (0, 0);
+            var responseRaw = requester.GetResponse($"https://geocode-maps.yandex.ru/1.x?geocode=Moscow{adress}&apikey={ApiKey}&format=xml");
+            // var cor =   wheelchair(responseRaw).Split();
+            var cor = XMLParser(responseRaw).Split();
+            if (float.TryParse(cor[1],  NumberStyles.Any,  CultureInfo.InvariantCulture, out var latitude) && float.TryParse(cor[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var longitude)) { return (latitude, longitude); }
+            else
+            {
+                throw new InvalidDataException("Can't parse");
+            }
         }
         private string wheelchair(string text)
         {
@@ -67,6 +77,25 @@ namespace GetData
            int index =  listofwords.IndexOf("pos");
            index += 2;
            return listofwords[index];
+        }
+        private string XMLParser(string text)
+        {
+
+            string answer = "0 0";
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(text);
+            string found = xml.GetElementsByTagName("found")[0].InnerText;
+            try
+            {if (found != "0")
+                {
+                    answer = xml.GetElementsByTagName("pos")[0]?.InnerText;
+                }
+            }
+            catch(Exception e) { return "0 0"; }
+            
+            return answer;
+
+             
         }
     }
 }

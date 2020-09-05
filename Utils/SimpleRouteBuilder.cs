@@ -1,5 +1,7 @@
-﻿using Itinero;
+﻿using HtmlAgilityPack;
+using Itinero;
 using Itinero.Profiles;
+using System;
 using System.IO;
 
 namespace Utils
@@ -22,8 +24,19 @@ namespace Utils
             (float latitude, float longtitude) pointFrom,
             (float latitude, float longtitude) pointTo)
         {
-            var loc1 = router.Resolve(profile, pointFrom.latitude, pointFrom.longtitude);
-            var loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude);
+            RouterPoint loc1 = null;
+            RouterPoint loc2;
+            try
+            {
+                loc1 = router.Resolve(profile, pointFrom.latitude, pointFrom.longtitude);
+                loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude);
+
+            }
+            catch (Exception E)
+            {
+                return router.Calculate(profile, new[] { loc1, loc1 });
+            }
+            
 
             return router.Calculate(profile, new[] { loc1, loc2 });
         }

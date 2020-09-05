@@ -114,12 +114,14 @@ namespace Utils
 
             foreach (var c in candidates)
             {
-                var dist = distanceTo(c);
-                if (dist < bestDistance)
-                {
-                    bestDistance = dist;
-                    bestCandidate = c;
-                }
+
+                    var dist = distanceTo(c);
+                    if (dist < bestDistance && dist!=0)
+                    {
+                        bestDistance = dist;
+                        bestCandidate = c;
+                    }
+                
             }
 
             return bestCandidate;

@@ -5,7 +5,7 @@
         public const string URL_OSM_DATA = "https://download.geofabrik.de/russia/central-fed-district-latest.osm.pbf";
         public const string URL_INFECTED = "https://coronavirus-online.moscow/sluchai-koronavirusa-v-moskve/";
 
-        private const string PATH_MAP_PREFIX = "../../../../MapData/";
+        private const string PATH_MAP_PREFIX = "../MapData/";
         public const string PATH_TO_OSMFBF = PATH_MAP_PREFIX + "central-district-raw.osm.pbf";
         public const string PATH_TO_SERIALIZED = PATH_MAP_PREFIX + "serialized";
         public const string PATH_TO_INFECTED_JSON = PATH_MAP_PREFIX + "infected.json";

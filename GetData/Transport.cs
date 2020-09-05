@@ -8,7 +8,7 @@ namespace GetData
 {
    public class Transport 
     {
-        const string Path = @"../../../../GetData/TempData/BikesAdresses.txt";
+        const string Path = @"../GetData/TempData/BikesAdresses.txt";
         public List<Parking> Transports { get;  }
         CoordinatesFinder coordinatesFinder;
         public Transport()
@@ -24,21 +24,20 @@ namespace GetData
                 string line;
                 while ((line = TextFileStream.ReadLine()) != null)
                 {
-                    //string[] temp = coordinatesFinder.GetCoordinates(line);
-                    string[] temp = null;
-                    try
+                     var (latitude, longitude) = coordinatesFinder.GetCoordinates(line);
+
+
+                    if (longitude != 0 && latitude != 0)
                     {
-                        float longtitude = float.Parse(temp[0], CultureInfo.InvariantCulture);
-                        float latitude = float.Parse(temp[1], CultureInfo.InvariantCulture);
                         Transports.Add(new Parking()
                         {
-                            Longitude = longtitude,
+                            Longitude = longitude,
                             Latitude = latitude,
 
 
                         });
-                    }
-                    catch { }
+
+                    }                   
                     
                     
                 }

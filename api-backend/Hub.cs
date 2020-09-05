@@ -7,6 +7,7 @@ using Utils;
 using Itinero;
 using Itinero.Profiles;
 using System.Text.Json;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace api_backend
 {
@@ -21,7 +22,7 @@ namespace api_backend
 
             Start = new Parking() { Longitude = longitudeStart, Latitude = latitudeStart };
             Finish = new Parking() { Latitude = latitudeFinish, Longitude = longitudeFinish };
-            NearestPointer = new NearestPointerContainer<Parking>(new Transport().Transports, 1 / 64f, 1 / 111f);
+            NearestPointer = new NearestPointerContainer<Parking>(new Transport().Transports, 1, 1);
             RouteBuilder = new SimpleRouteBuilder(Itinero.Osm.Vehicles.Vehicle.Pedestrian.Fastest(), new Vehicle[] { Itinero.Osm.Vehicles.Vehicle.Pedestrian, Itinero.Osm.Vehicles.Vehicle.Bicycle } );
 
         }
@@ -39,14 +40,28 @@ namespace api_backend
                 return route.TotalTime;
             }
             );
-            var Route1 = RouteBuilder.BuildRoute((Start.Latitude, Start.Longitude), (ClosestToStart.Latitude, ClosestToStart.Longitude));
-            var Route2 = RouteBuilder.BuildRoute((ClosestToStart.Latitude, ClosestToStart.Longitude), (ClosestToFinish.Latitude, ClosestToFinish.Longitude));
-            var Route3 = RouteBuilder.BuildRoute((ClosestToFinish.Latitude, ClosestToFinish.Longitude), (Finish.Latitude, Finish.Longitude));
+            Route Route4 = null;
+            Route Route3 = null;
+            Route Route2= null;
+            Route Route1 = null;
 
+
+            if (ClosestToStart != null && ClosestToFinish != null)
+            {
+                  Route1 = RouteBuilder.BuildRoute((Start.Latitude, Start.Longitude), (ClosestToStart.Latitude, ClosestToStart.Longitude));
+                 Route2 = RouteBuilder.BuildRoute((ClosestToStart.Latitude, ClosestToStart.Longitude), (ClosestToFinish.Latitude, ClosestToFinish.Longitude));
+                 Route3 = RouteBuilder.BuildRoute((ClosestToFinish.Latitude, ClosestToFinish.Longitude), (Finish.Latitude, Finish.Longitude));
+            }
+            else 
+            {
+                Route4 = RouteBuilder.BuildRoute((Start.Latitude, Start.Longitude), (Finish.Latitude, Finish.Longitude));
+            
+            }
             var arr = new {
-                ToBicycleParking = Route1.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
-                FromParkingToParking = Route2.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
-                FromParkingToFinish = Route3.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
+                ToBicycleParking = Route1?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
+                FromParkingToParking = Route2?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
+                FromParkingToFinish = Route3?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
+                StraightBetweenStartAndFinish = Route4?.Select(c=> new[] {c.Location().Longitude, c.Location().Latitude }).ToArray()
             };
 
             var json = JsonSerializer.Serialize(arr);
