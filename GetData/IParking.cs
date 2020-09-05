@@ -4,13 +4,16 @@ using System.Text;
 
 namespace GetData
 {
-    interface ITransport
+    interface IParking
     {
         public float Longitude { get; set; }
 
         public float Latitude { get; set; }
 
-        public enum TransportType { }
+        public enum TransportType 
+        {
+            
+        }
 
 
     }
