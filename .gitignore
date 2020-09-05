@@ -6,8 +6,9 @@
 /MapData
 /routingapitest/bin/Debug/netcoreapp3.1
 /routingapitest/obj
-/.vs/amc-hackathon back/v16
-/.vs/amc-hackathon back/config
+/.vs
 /amc-hackathon back/bin/Debug/netcoreapp3.1
-/Utils/bin/Debug/netcoreapp3.1
+/Utils/bin
 /Utils/obj
+/GetData/bin
+/GetData/obj
