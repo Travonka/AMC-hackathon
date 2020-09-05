@@ -14,36 +14,6 @@ namespace routingapitest
     {
         static void Main(string[] args)
         {
-            var car = Itinero.Osm.Vehicles.Vehicle.Car;
-
-            var routerDb = new RouterDb();
-            //const string path = @"../../../../MapData/moscow-overpass";
-            const string path = @"../../../../MapData/central-fed-district-latest.osm.pbf";
-            const string pathSer = path + ".ser";
-            //using (var stream = new FileInfo(path).Open(FileMode.Create))
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            using (var stream = new FileInfo(path).OpenRead())
-            {
-                // create the network for cars only.
-                routerDb.LoadOsmData(stream, car);
-                //routerDb = RouterDb.Deserialize(stream);
-
-                //routerDb.Serialize(stream);
-                
-            }
-
-            stopwatch.Stop();
-            Console.WriteLine($"Loaded in {stopwatch.ElapsedMilliseconds} ms");
-
-            using (var stream = new FileInfo(pathSer).Open(FileMode.Create))
-            {
-                routerDb.Serialize(stream);
-            }
-
-            return;
             var router = new Router(routerDb);
             var profile = new Profile("zhopa", ProfileMetric.DistanceInMeters, 
                 new [] { "Car" },

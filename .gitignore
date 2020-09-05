@@ -7,3 +7,7 @@
 /routingapitest/bin/Debug/netcoreapp3.1
 /routingapitest/obj
 /.vs/amc-hackathon back/v16
+/.vs/amc-hackathon back/config
+/amc-hackathon back/bin/Debug/netcoreapp3.1
+/Utils/bin/Debug/netcoreapp3.1
+/Utils/obj
