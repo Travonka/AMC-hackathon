@@ -12,3 +12,5 @@
 /Utils/obj
 /GetData/bin
 /GetData/obj
+/UnitTests/bin/Debug/netcoreapp3.1
+/UnitTests/obj
