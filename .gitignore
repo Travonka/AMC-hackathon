@@ -3,3 +3,7 @@
 ################################################################################
 
 /amc-hackathon back/obj
+/MapData
+/routingapitest/bin/Debug/netcoreapp3.1
+/routingapitest/obj
+/.vs/amc-hackathon back/v16

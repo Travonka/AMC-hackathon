@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "amc-hackathon back", "amc-hackathon back\amc-hackathon back.csproj", "{BBFF2003-AEB1-436C-9824-CC0C1298B22A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "routingapitest", "routingapitest\routingapitest.csproj", "{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9A31FF2-5850-4A15-9F90-B132A44767E9}
+	EndGlobalSection
+EndGlobal
