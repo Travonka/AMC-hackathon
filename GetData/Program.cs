@@ -4,6 +4,8 @@ namespace yandextransportapi
 {
     class Program
     {
-        WebRequest request = WebRequest.Create("");
+        public static void Main()
+        { 
+        }
     }
 }
