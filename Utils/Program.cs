@@ -6,7 +6,7 @@ namespace Utils
     {
         static void Main(string[] args)
         {
-            Installer.InstallAndLog();
+            Installer.Install(Installer.LogLevel.EVERYTHING);
         }
     }
 }

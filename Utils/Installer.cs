@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,24 +51,42 @@ namespace Utils
             return true;
         }
 
-        public static void InstallAndLog()
+        public enum LogLevel 
         {
+            EVERYTHING = 0, ANY_INFO = 0,
+            ACTION = 1,     IMPORTANT_INFO = 1,
+            NONE = 2,       
+        }
+
+        public static void Install(LogLevel logLevel)
+        {
+            void Log(string msg, LogLevel level)
+            {
+                if ((int)level >= (int)logLevel)
+                    Console.WriteLine($"Installer: {msg}");
+            }
+
             var sw = new Stopwatch();
-            Console.WriteLine("Installing begins");
             
             sw.Start();
             if (Download(Const.DOWNLOAD_URL, Const.PATH_TO_OSMFBF))
-                Console.WriteLine($"Spent {sw.ElapsedMilliseconds} ms on downloading");
+            {
+                Log("Installing begins", LogLevel.IMPORTANT_INFO);
+                Log($"Spent {sw.ElapsedMilliseconds} ms on downloading", LogLevel.IMPORTANT_INFO);
+            }
             else
-                Console.WriteLine("Downloading skipped");
+                Log("Downloading skipped", LogLevel.ANY_INFO);
             sw.Reset();
             sw.Start();
             if (Serialize(Const.PATH_TO_OSMFBF, Const.PATH_TO_SERIALIZED))
-                Console.WriteLine($"Spent {sw.ElapsedMilliseconds} ms on serialization");
+            {
+                Log("Serialization begins", LogLevel.IMPORTANT_INFO);
+                Log($"Spent {sw.ElapsedMilliseconds} ms on serialization", LogLevel.IMPORTANT_INFO);
+            }
             else
-                Console.WriteLine("Serialization skipped");
-            
-            Console.WriteLine("OK");
+                Log("Serialization skipped", LogLevel.ANY_INFO);
+
+            Log("OK", LogLevel.ANY_INFO);
         }
     }
 }

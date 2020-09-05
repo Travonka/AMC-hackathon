@@ -13,16 +13,10 @@ namespace routingapitest
     {
         static void Main(string[] args)
         {
-            Installer.InstallAndLog();
+            var routeBuilder = new SimpleRouteBuilder();
 
-            var routerDb = RouterDb.Deserialize(new FileInfo(Const.PATH_TO_SERIALIZED).OpenRead());
-            var profile = Itinero.Osm.Vehicles.Vehicle.Car.Fastest();
+            var route = routeBuilder.BuildRoute((55.803f, 37.489f), (55.706f, 37.682f));
 
-            var router = new Router(routerDb);
-            var loc1 = router.Resolve(profile, 55.803f, 37.489f);
-            var loc2 = router.Resolve(profile, 55.706f, 37.682f);
-            
-            var route = router.Calculate(profile, new[] { loc1, loc2 });
             Console.WriteLine(route);
             Console.WriteLine("\n\n");
             Console.WriteLine(string.Join("\n", route));
