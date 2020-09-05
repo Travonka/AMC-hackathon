@@ -9,9 +9,9 @@ namespace Utils
 {
     public sealed class SimpleRouteBuilder
     {
-        private RouterDb routerDb;
-        private Profile profile;
-        private Router router;
+        private readonly RouterDb routerDb;
+        private readonly Profile profile;
+        private readonly Router router;
 
         public SimpleRouteBuilder(Profile profile = null)
         {
@@ -25,8 +25,8 @@ namespace Utils
             (float latitude, float longtitude) pointFrom,
             (float latitude, float longtitude) pointTo)
         {
-            var loc1 = router.Resolve(profile, 55.803f, 37.489f);
-            var loc2 = router.Resolve(profile, 55.706f, 37.682f);
+            var loc1 = router.Resolve(profile, pointFrom.latitude, pointFrom.longtitude);
+            var loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude);
 
             return router.Calculate(profile, new[] { loc1, loc2 });
         }
