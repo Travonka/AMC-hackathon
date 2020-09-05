@@ -9,7 +9,7 @@ namespace UnitTests
     [TestClass]
     public class NearestPoint
     {
-        public class MyLocation : ITransport
+        public class MyLocation : IParking
         {
             public float Longitude { get; set; }
             public float Latitude { get; set; }

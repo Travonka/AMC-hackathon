@@ -6,15 +6,15 @@ using System.Net;
 using System.Globalization;
 namespace GetData
 {
-    class Transport 
+   public class Transport 
     {
         const string Path = @"../../../../GetData/TempData/BikesAdresses.txt";
-        List<IParking> Transports;
+        public List<Parking> Transports { get;  }
         CoordinatesFinder coordinatesFinder;
         public Transport()
         {
             coordinatesFinder = new CoordinatesFinder();
-            Transports = new List<IParking>();
+            Transports = new List<Parking>();
             GetCoordinates();
         }
         private void GetCoordinates()

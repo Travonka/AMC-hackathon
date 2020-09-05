@@ -40,7 +40,6 @@ namespace api_backend
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

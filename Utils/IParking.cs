@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GetData
 {
-    public interface ITransport
+    public interface IParking
     {
         public float Longitude { get; set; }
 

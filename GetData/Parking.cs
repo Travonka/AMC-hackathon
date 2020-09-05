@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GetData
 {
-    class Parking : IParking
+    public class Parking : IParking
     {
         public float Longitude { get; set; }
 

@@ -13,7 +13,7 @@ namespace Utils
         }
     }
 
-    public sealed class NearestPointerContainer<TLocatable> where TLocatable : ITransport
+    public sealed class NearestPointerContainer<TLocatable> where TLocatable : IParking
     {
         private sealed class Cell
         {
@@ -126,7 +126,7 @@ namespace Utils
         }
 
         public NearestPointerContainer(
-            IEnumerable<TLocatable> parkings, float maxDistanceLongtitude, float maxDistanceLatitude)
+            IEnumerable<TLocatable> parkings, float maxDistanceLongtitude , float maxDistanceLatitude)
         {
             MaxDistanceLongtitude = maxDistanceLongtitude;
             MaxDistanceLatitude = maxDistanceLatitude;
