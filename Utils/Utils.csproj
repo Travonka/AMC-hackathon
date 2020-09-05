@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Itinero" Version="1.6.0-pre030" />
-    <PackageReference Include="Itinero.IO.Osm" Version="1.6.0-pre030" />
+    <PackageReference Include="Itinero.IO.Osm" Version="1.5.0" />
   </ItemGroup>
 
 </Project>

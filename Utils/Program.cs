@@ -4,11 +4,9 @@ namespace Utils
 {   
     class Program
     {
-        
-
         static void Main(string[] args)
         {
-            
+            Installer.InstallAndLog();
         }
     }
 }
