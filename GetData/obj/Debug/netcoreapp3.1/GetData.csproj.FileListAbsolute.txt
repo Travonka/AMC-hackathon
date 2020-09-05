@@ -1,4 +1,0 @@
-C:\Users\Ivan\source\repos\amc-hackaton-back-repo\AMC-hackathon\yandextransportapi\bin\Debug\netcoreapp3.1\GetData.exe
-C:\Users\Ivan\source\repos\amc-hackaton-back-repo\AMC-hackathon\yandextransportapi\obj\Debug\netcoreapp3.1\GetData.csprojAssemblyReference.cache
-C:\Users\Ivan\source\repos\amc-hackaton-back-repo\AMC-hackathon\yandextransportapi\obj\Debug\netcoreapp3.1\GetData.AssemblyInfoInputs.cache
-C:\Users\Ivan\source\repos\amc-hackaton-back-repo\AMC-hackathon\yandextransportapi\obj\Debug\netcoreapp3.1\GetData.AssemblyInfo.cs
