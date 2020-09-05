@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "amc-hackathon back", "amc-hackathon back\amc-hackathon back.csproj", "{BBFF2003-AEB1-436C-9824-CC0C1298B22A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "routingapitest", "routingapitest\routingapitest.csproj", "{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetData", "yandextransportapi\GetData.csproj", "{F22AE91C-00DE-4E3F-A4DD-41B6021556D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetData", "GetData\GetData.csproj", "{F22AE91C-00DE-4E3F-A4DD-41B6021556D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{DDDA3455-DE16-40B7-A824-830793BB7683}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBFF2003-AEB1-436C-9824-CC0C1298B22A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE3AA154-D6F3-4590-A63A-5E98AF1A7FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{F22AE91C-00DE-4E3F-A4DD-41B6021556D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F22AE91C-00DE-4E3F-A4DD-41B6021556D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F22AE91C-00DE-4E3F-A4DD-41B6021556D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDA3455-DE16-40B7-A824-830793BB7683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDA3455-DE16-40B7-A824-830793BB7683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDA3455-DE16-40B7-A824-830793BB7683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDA3455-DE16-40B7-A824-830793BB7683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
