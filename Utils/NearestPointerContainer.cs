@@ -5,6 +5,14 @@ using GetData;
 
 namespace Utils
 {
+    public sealed class TooFarException : ArgumentOutOfRangeException
+    {
+        public TooFarException(float longitude, float latitude) 
+            : base($"Invalid coordinates of parking: {longitude} {latitude}")
+        {
+        }
+    }
+
     public sealed class NearestPointerContainer<TLocatable> where TLocatable : ITransport
     {
         private sealed class Cell
@@ -20,22 +28,47 @@ namespace Utils
         private readonly int xCount;
         private readonly int yCount;
         private readonly float offsetLatitude;
-        private readonly float offsetLongtitude;
+        private readonly float offsetLongitude;
 
         private bool InCellBounds(int x, int y)
         {
             return !(x < 0 || x >= xCount || y < 0 || y >= yCount);
         }
 
-        private bool TryGetCoord(TLocatable parking, out (int x, int y) res)
+        private bool InCellBoundsOrNeighbour(int x, int y)
         {
-            var xDegree = parking.Latitude - offsetLatitude;
-            var yDegree = parking.Longitude - offsetLongtitude;
+            return !(x < -1 || x > xCount || y < -1 || y > yCount);
+        }
+
+        private (int x, int y) GetXY(TLocatable parking)
+        {
+            var xDegree = parking.Longitude - offsetLongitude;
+            var yDegree = parking.Latitude - offsetLatitude;
 
             var x = (int)(xDegree / MaxDistanceLatitude);
             var y = (int)(yDegree / MaxDistanceLongtitude);
+            return (x, y);
+        }
+
+        private bool TryGetCoord(TLocatable parking, out (int x, int y) res)
+        {
+            var (x, y) = GetXY(parking);
 
             if (!InCellBounds(x, y))
+            {
+                res = (-1, -1);
+                return false;
+            }
+
+            res = (x, y);
+            return true;
+        }
+
+        private bool TryGetCoordNeighbour(TLocatable parking, out (int x, int y) res)
+        {
+            var (x, y) = GetXY(parking);
+
+            if (!InCellBoundsOrNeighbour(x, y))
             {
                 res = (-1, -1);
                 return false;
@@ -48,12 +81,20 @@ namespace Utils
         private (int x, int y) GetCoordWithCheck(TLocatable parking)
         {
             if (!TryGetCoord(parking, out var res))
-                throw new ArgumentOutOfRangeException($"Invalid coordinates of parking: {parking.Latitude} {parking.Longitude}");
+                throw new TooFarException(parking.Longitude, parking.Latitude);
 
             return res;
         }
 
-        public void AddParking(TLocatable parking)
+        private (int x, int y) GetCoordWithCheckNeighbour(TLocatable parking)
+        {
+            if (!TryGetCoordNeighbour(parking, out var res))
+                throw new TooFarException(parking.Longitude, parking.Latitude);
+
+            return res;
+        }
+
+        private void AddParking(TLocatable parking)
         {
             var (x, y) = GetCoordWithCheck(parking);
             container[x, y].Add(parking);
@@ -61,7 +102,7 @@ namespace Utils
 
         public TLocatable GetNearest(TLocatable parking, Func<TLocatable, float> distanceTo)
         {
-            var (x, y) = GetCoordWithCheck(parking);
+            var (x, y) = GetCoordWithCheckNeighbour(parking);
             var candidates = new List<TLocatable>();
             for (int xOff = -1; xOff <= 1; xOff++)
                 for (int yOff = -1; yOff <= 1; yOff++)
@@ -85,12 +126,18 @@ namespace Utils
         }
 
         public NearestPointerContainer(
-            IEnumerable<TLocatable> parkings, float maxDistanceLatitude, float maxDistanceLongtitude)
+            IEnumerable<TLocatable> parkings, float maxDistanceLongtitude, float maxDistanceLatitude)
         {
-            var leftPoint = parkings.Select(c => c.Latitude).Min();
-            var rightPoint = parkings.Select(c => c.Latitude).Max();
-            var bottomPoint = parkings.Select(c => c.Longitude).Min();
-            var topPoint = parkings.Select(c => c.Longitude).Max();
+            MaxDistanceLongtitude = maxDistanceLongtitude;
+            MaxDistanceLatitude = maxDistanceLatitude;
+
+            var leftPoint = parkings.Select(c => c.Longitude).Min();
+            var rightPoint = parkings.Select(c => c.Longitude).Max();
+            var bottomPoint = parkings.Select(c => c.Latitude).Min();
+            var topPoint = parkings.Select(c => c.Latitude).Max();
+
+            offsetLongitude = leftPoint;
+            offsetLatitude = bottomPoint;
 
             var width = rightPoint - leftPoint;
             var height = topPoint - bottomPoint;

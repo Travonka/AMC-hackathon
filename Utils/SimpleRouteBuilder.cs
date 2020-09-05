@@ -1,9 +1,6 @@
 ﻿using Itinero;
 using Itinero.Profiles;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Utils
 {
