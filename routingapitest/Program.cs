@@ -13,18 +13,13 @@ namespace routingapitest
     {
         static void Main(string[] _)
         {
-            var routeBuilder = new SimpleRouteBuilder();
+            //var routeBuilder = new SimpleRouteBuilder();
+            //
+            //var route = routeBuilder.BuildRoute((55.803f, 37.489f), (55.706f, 37.682f));
 
-            var route = routeBuilder.BuildRoute((55.803f, 37.489f), (55.706f, 37.682f));
+            var loaded = InfectedBuildingsLoader.Load();
 
-            Console.WriteLine(route);
-            Console.WriteLine("\n\n");
-            Console.WriteLine(string.Join("\n", route));
-            Console.WriteLine("\n\n");
-            Console.WriteLine(string.Join("\n", route.Select(c => c.Location())));
-            Console.WriteLine("\n\n");
-            Console.WriteLine(string.Join("\n", 
-                route.Select(c => c.Location().Longitude + " " + c.Location().Latitude)));
+            Console.WriteLine(string.Join(", ", loaded.Select(c => c.Street + " " + c.Building)));
         }
     }
 }

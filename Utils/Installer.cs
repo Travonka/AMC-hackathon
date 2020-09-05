@@ -1,25 +1,12 @@
 ﻿using Itinero;
 using Itinero.IO.Osm;
-using Itinero.Osm;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utils
 {
-    public static class Const
-    {
-        public const string DOWNLOAD_URL = "https://download.geofabrik.de/russia/central-fed-district-latest.osm.pbf";
-        public const string PATH_TO_OSMFBF = @"../../../../MapData/central-district-raw.osm.pbf";
-        public const string PATH_TO_SERIALIZED = @"../../../../MapData/serialized";
-    }
-
     public static class Installer
     {
         private static bool Download(string url, string destinationPath)
@@ -69,7 +56,7 @@ namespace Utils
             var sw = new Stopwatch();
             
             sw.Start();
-            if (Download(Const.DOWNLOAD_URL, Const.PATH_TO_OSMFBF))
+            if (Download(Const.URL_OSM_DATA, Const.PATH_TO_OSMFBF))
             {
                 Log("Installing begins", LogLevel.IMPORTANT_INFO);
                 Log($"Spent {sw.ElapsedMilliseconds} ms on downloading", LogLevel.IMPORTANT_INFO);
