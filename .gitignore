@@ -16,3 +16,4 @@
 /UnitTests/obj
 /api-backend/obj
 /api-backend/bin/Release/netcoreapp3.1
+/api-backend/bin/Debug/netcoreapp3.1

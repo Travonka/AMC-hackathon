@@ -17,9 +17,22 @@ namespace api_backend
         Parking Start, Finish;
         const float kmInDegree = 64;
 
+        private static bool InMoscow(IParking parking)
+            => parking.Latitude < Const.LATITUDE_UP && parking.Latitude > Const.LATITUDE_DOWN
+            && parking.Longitude > Const.LONGITUDE_DOWN && parking.Longitude < Const.LONGITUDE_UP;
+
         private static void Init()
         {
-            NearestPointer = new NearestPointerContainer<Parking>(new Transport().Transports, 1f / 64, 1f / 111);
+            var transports = new Transport().Transports.Where(InMoscow);
+            try
+            {
+                NearestPointer = new NearestPointerContainer<Parking>(transports, 1.5f / 64, 1.5f / 111,
+                    Const.LATITUDE_UP, Const.LATITUDE_DOWN, Const.LONGITUDE_UP, Const.LONGITUDE_DOWN);
+            }
+            catch (TooFarException)
+            {
+                var a = 5;
+            }
             RouteBuilder = new SimpleRouteBuilder(Itinero.Osm.Vehicles.Vehicle.Pedestrian.Fastest(), new Vehicle[] { Itinero.Osm.Vehicles.Vehicle.Pedestrian, Itinero.Osm.Vehicles.Vehicle.Bicycle });
         }
 

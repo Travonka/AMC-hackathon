@@ -45,8 +45,8 @@ namespace Utils
             var xDegree = parking.Longitude - offsetLongitude;
             var yDegree = parking.Latitude - offsetLatitude;
 
-            var x = (int)(xDegree / MaxDistanceLatitude);
-            var y = (int)(yDegree / MaxDistanceLongtitude);
+            var x = (int)(xDegree / MaxDistanceLongtitude);
+            var y = (int)(yDegree / MaxDistanceLatitude);
             return (x, y);
         }
 
@@ -128,15 +128,16 @@ namespace Utils
         }
 
         public NearestPointerContainer(
-            IEnumerable<TLocatable> parkings, float maxDistanceLongtitude , float maxDistanceLatitude)
+            IEnumerable<TLocatable> parkings, float maxDistanceLongtitude, float maxDistanceLatitude, 
+            float latitudeUp = 0, float latitudeDown = 0, float longitudeUp = 0, float longitudeDown = 0)
         {
             MaxDistanceLongtitude = maxDistanceLongtitude;
             MaxDistanceLatitude = maxDistanceLatitude;
 
-            var leftPoint = parkings.Select(c => c.Longitude).Min();
-            var rightPoint = parkings.Select(c => c.Longitude).Max();
-            var bottomPoint = parkings.Select(c => c.Latitude).Min();
-            var topPoint = parkings.Select(c => c.Latitude).Max();
+            var leftPoint = longitudeDown == 0 ? parkings.Select(c => c.Longitude).Min() : longitudeDown;
+            var rightPoint = longitudeUp == 0 ? parkings.Select(c => c.Longitude).Max() : longitudeUp;
+            var bottomPoint = latitudeDown == 0 ? parkings.Select(c => c.Latitude).Min() : latitudeDown;
+            var topPoint = latitudeUp == 0 ? parkings.Select(c => c.Latitude).Max() : latitudeUp;
 
             offsetLongitude = leftPoint;
             offsetLatitude = bottomPoint;
@@ -144,8 +145,8 @@ namespace Utils
             var width = rightPoint - leftPoint;
             var height = topPoint - bottomPoint;
 
-            xCount = (int)(width / (maxDistanceLatitude) + 1);
-            yCount = (int)(height / (maxDistanceLongtitude) + 1);
+            xCount = (int)(width / (maxDistanceLongtitude) + 1);
+            yCount = (int)(height / (maxDistanceLatitude) + 1);
 
             container = new Cell[xCount, yCount];
 
