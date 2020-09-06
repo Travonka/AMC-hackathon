@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Itinero;
+using Itinero.Exceptions;
 using Itinero.Profiles;
 using System;
 using System.IO;
@@ -32,9 +33,9 @@ namespace Utils
                 loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude);
 
             }
-            catch (Exception E)
+            catch (ResolveFailedException excep)
             {
-                return router.Calculate(profile, new[] { loc1, loc1 });
+                return null;
             }
             
 
