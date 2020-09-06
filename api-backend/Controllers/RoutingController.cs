@@ -21,13 +21,20 @@ namespace api_backend.Controllers
         public string GetRoute(float longitudeStart, float latitudeStart, float longitudeFinish, float latitudeFinish)
         {
             Hub test = new Hub(longitudeStart, latitudeStart, latitudeFinish, longitudeFinish);
-
             return test.BuildRoute();
         }
+
         [Route("/Test")]
         public IActionResult Test()
         {
            return Redirect("/GetRoute");
+        }
+
+        [Route("/GetCoordinates")]
+        [HttpGet]
+        public string GetCoordinates(string address)
+        {
+            return Hub.GetCoordinatesOfAddress(address);
         }
     }
 }

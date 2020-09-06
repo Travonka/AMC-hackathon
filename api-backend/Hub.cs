@@ -8,10 +8,11 @@ using Itinero;
 using Itinero.Profiles;
 using System.Text.Json;
 using System.Runtime.InteropServices.ComTypes;
+using System.Globalization;
 
 namespace api_backend
 {
-    public class Hub
+    public sealed class Hub
     {
         Parking Start, Finish;
         const float kmInDegree = 64;
@@ -76,6 +77,12 @@ namespace api_backend
         }
 
 
+        private static CoordinatesFinder coordFinder = new CoordinatesFinder();
 
+        public static string GetCoordinatesOfAddress(string address)
+        {
+            var coords = coordFinder.GetCoordinates(address);
+            return coords.latitude.ToString(CultureInfo.InvariantCulture) + " " + coords.longitude.ToString(CultureInfo.InvariantCulture);
+        }
     }
 }
