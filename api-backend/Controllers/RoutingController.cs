@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using Utils;
 
 namespace api_backend.Controllers
 {
@@ -10,8 +12,6 @@ namespace api_backend.Controllers
         [HttpGet]
         public ActionResult App()
         {
-            //return Content(System.IO.File.ReadAllText("../Map2.html"));
-            //return Content("<html>quack</html>");
             return View("Map2");
             
         }
@@ -20,10 +20,21 @@ namespace api_backend.Controllers
         [HttpGet]
         public string GetRoute(string addressFrom, string addressTo)
         {
-            var (latitudeStart, longitudeStart) = Hub.GetCoordinatesOfAddress(addressFrom);
-            var (latitudeFinish, longitudeFinish) = Hub.GetCoordinatesOfAddress(addressTo);
-            Hub test = new Hub(longitudeStart, latitudeStart, latitudeFinish, longitudeFinish);
-            return test.BuildRoute();
+            try
+            {
+                var (latitudeStart, longitudeStart) = Hub.GetCoordinatesOfAddress(addressFrom);
+                var (latitudeFinish, longitudeFinish) = Hub.GetCoordinatesOfAddress(addressTo);
+                Hub test = new Hub(longitudeStart, latitudeStart, latitudeFinish, longitudeFinish);
+                return test.BuildRoute();
+            }
+            catch (TooFarException)
+            {
+                return "# error too far";
+            }
+            catch (Exception e)
+            { 
+                return "# unhandled error: " + e.Message;
+            }
         }
 
         [Route("/Test")]
