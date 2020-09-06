@@ -16,8 +16,18 @@
           border: 0px;
          
       }
+          .field button {
+              margin-left: 5px;
+              height: 50px;
+              width: 320px;
+              border-radius: 10px 10px 10px 10px;
+              border: 0px;
+          }
       .field input::selection
       {border: 0px;}
+        .field button::selection {
+            border: 0px;
+        }
       .field input[type="submit"]
       {   
           background-color: #32CD32;
@@ -94,7 +104,7 @@
         })
         ],
         view: new ol.View({
-        center: ol.proj.fromLonLat([53.75, 37.61]),
+        center: ol.proj.fromLonLat([37.61, 53.75]),
         zoom: 8
         })
     });
