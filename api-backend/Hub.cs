@@ -69,10 +69,12 @@ namespace api_backend
                 ToBicycleParking = Route1?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
                 FromParkingToParking = Route2?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
                 FromParkingToFinish = Route3?.Select(c => new[] { c.Location().Longitude, c.Location().Latitude }).ToArray(),
-                StraightBetweenStartAndFinish = Route4?.Select(c=> new[] {c.Location().Longitude, c.Location().Latitude }).ToArray()
+                StraightBetweenStartAndFinish = Route4?.Select(c=> new[] {c.Location().Longitude, c.Location().Latitude }).ToArray(),
+                RawData = new[] { Start.Latitude, Start.Longitude, Finish.Latitude, Finish.Longitude }
             };
 
             var json = JsonSerializer.Serialize(arr);
+
             return json;
         }
 

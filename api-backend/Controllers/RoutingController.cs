@@ -20,7 +20,6 @@ namespace api_backend.Controllers
         [HttpGet]
         public string GetRoute(string addressFrom, string addressTo)
         {
-            
             var (longitudeStart, latitudeStart) = Hub.GetCoordinatesOfAddress(addressFrom);
             var (longitudeFinish, latitudeFinish) = Hub.GetCoordinatesOfAddress(addressTo);
             Hub test = new Hub(longitudeStart, latitudeStart, latitudeFinish, longitudeFinish);

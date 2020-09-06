@@ -24,7 +24,7 @@
           border:0px;
           opacity: 0.8;
       }
-      .field input[type="submit"]:hover
+      .submit-button button
       {
           background-color: #32CD32;
           
@@ -58,20 +58,6 @@
   <div id="map" class="mapcontainer" style="width: 100%; height: 100%"></div>
   <div class="frame">
     
-    <!--
-  <form method="GET" action="/GetRoute">
-      <div class="field"> 
-          <input type="text" placeholder="От:"/>
-      </div>
-      <div class="field" >           
-          <input type="text" placeholder="До:"/>
-      </div>
-      <div class="field" >
-          <input type="submit" value="Найти маршрут">
-      </div>
-  </form>
-      
-  -->
   
   <div class="field"> 
     <input type="text" id="field-from" placeholder="От:"/>
@@ -120,8 +106,8 @@
         })
       ],
       view: new ol.View({
-        center: ol.proj.fromLonLat([37.41, 8.82]),
-        zoom: 5
+        center: ol.proj.fromLonLat([53.75, 37.61]),
+        zoom: 8
       })
     });
 // Москва, Пушкинская 4
@@ -183,6 +169,5 @@
       }
   }
   </script>
-    </script>
   </body>
 </html>
