@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace api_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoutingController : ControllerBase
+    public class RoutingController : Controller
     {
+        [Route("/App.html")]
+        [HttpGet]
+        public ActionResult App()
+        {
+            //return Content(System.IO.File.ReadAllText("../Map2.html"));
+            //return Content("<html>quack</html>");
+            return View("Map2");
+            
+        }
+
         [Route("/GetRoute")]
         [HttpGet]
         public string GetRoute(float longitudeStart, float latitudeStart, float longitudeFinish, float latitudeFinish)

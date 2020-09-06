@@ -29,9 +29,8 @@ namespace Utils
             RouterPoint loc2;
             try
             {
-                loc1 = router.Resolve(profile, pointFrom.latitude, pointFrom.longtitude);
-                loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude);
-
+                loc1 = router.Resolve(profile, pointFrom.latitude, pointFrom.longtitude, searchDistanceInMeter: 150);
+                loc2 = router.Resolve(profile, pointTo.latitude, pointTo.longtitude, searchDistanceInMeter: 150);
             }
             catch (ResolveFailedException excep)
             {

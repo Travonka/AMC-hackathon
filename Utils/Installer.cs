@@ -46,7 +46,7 @@ namespace Utils
             NONE = 2,       
         }
 
-        public static void Install(LogLevel logLevel, Itinero.Profiles.Vehicle[] vehicles)
+        public static void Install(LogLevel logLevel, Itinero.Profiles.Vehicle[] vehicles, string pathPrefix = "")
         {
             void Log(string msg, LogLevel level)
             {
@@ -57,7 +57,7 @@ namespace Utils
             var sw = new Stopwatch();
             
             sw.Start();
-            if (Download(Const.URL_OSM_DATA, Const.PATH_TO_OSMFBF))
+            if (Download(Const.URL_OSM_DATA, pathPrefix + Const.PATH_TO_OSMFBF))
             {
                 Log("Installing begins", LogLevel.IMPORTANT_INFO);
                 Log($"Spent {sw.ElapsedMilliseconds} ms on downloading", LogLevel.IMPORTANT_INFO);
@@ -66,7 +66,7 @@ namespace Utils
                 Log("Downloading skipped", LogLevel.ANY_INFO);
             sw.Reset();
             sw.Start();
-            if (Serialize(Const.PATH_TO_OSMFBF, Const.PATH_TO_SERIALIZED, vehicles))
+            if (Serialize(pathPrefix + Const.PATH_TO_OSMFBF, pathPrefix + Const.PATH_TO_SERIALIZED, vehicles))
             {
                 Log("Serialization begins", LogLevel.IMPORTANT_INFO);
                 Log($"Spent {sw.ElapsedMilliseconds} ms on serialization", LogLevel.IMPORTANT_INFO);
