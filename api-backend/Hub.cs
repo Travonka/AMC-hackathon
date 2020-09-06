@@ -79,10 +79,7 @@ namespace api_backend
 
         private static CoordinatesFinder coordFinder = new CoordinatesFinder();
 
-        public static string GetCoordinatesOfAddress(string address)
-        {
-            var coords = coordFinder.GetCoordinates(address);
-            return coords.latitude.ToString(CultureInfo.InvariantCulture) + " " + coords.longitude.ToString(CultureInfo.InvariantCulture);
-        }
+        public static (float longitude, float latitude) GetCoordinatesOfAddress(string address)
+            => coordFinder.GetCoordinates(address);
     }
 }

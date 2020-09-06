@@ -18,8 +18,11 @@ namespace api_backend.Controllers
 
         [Route("/GetRoute")]
         [HttpGet]
-        public string GetRoute(float longitudeStart, float latitudeStart, float longitudeFinish, float latitudeFinish)
+        public string GetRoute(string addressFrom, string addressTo)
         {
+            
+            var (longitudeStart, latitudeStart) = Hub.GetCoordinatesOfAddress(addressFrom);
+            var (longitudeFinish, latitudeFinish) = Hub.GetCoordinatesOfAddress(addressTo);
             Hub test = new Hub(longitudeStart, latitudeStart, latitudeFinish, longitudeFinish);
             return test.BuildRoute();
         }
@@ -28,13 +31,6 @@ namespace api_backend.Controllers
         public IActionResult Test()
         {
            return Redirect("/GetRoute");
-        }
-
-        [Route("/GetCoordinates")]
-        [HttpGet]
-        public string GetCoordinates(string address)
-        {
-            return Hub.GetCoordinatesOfAddress(address);
         }
     }
 }
